@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Data Rak</h2>
+      <button type="button" class="btn btn-sm btn-info" (click)="add(content)">Add</button>
+      <table class="table table-sm table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Nama Rak</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let d of data; let i = index">
+            <td>{{i+1}}</td>
+            <td>{{d.nama_rak}}</td>
+            <td>
+              <button type="button" class="btn btn-sm btn-primary" (click)="edit(d, content)">Edit</button>
+              <button type="button" class="btn btn-sm  btn-danger" (click)="delete(d)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Rak</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <!--Content-->
+    <form>
+      <div class="form-group row">
+        <label for="text-input" class="col-2 col-form-label">Nama Rak</label>
+        <div class="col-10">
+          <input type="text" id="text-input" class="form-control" name="nama_rak" [(ngModel)]="dataCollect.nama_rak">
+        </div>
+      </div>
+      <input type="hidden" name="id_rak" [(ngModel)]="dataCollect.id_rak">
+      <input type="hidden" name="type" [(ngModel)]="dataCollect.type">
+    </form>
+    <!--end content-->
+  </div>
+  <div class="modal-footer">
+    <div *ngIf="loading">Loading....</div>
+
+    <button type="button" class="btn btn-sm btn-outline-success" (click)="save(dataCollect)">Save</button>
+
+    <button type="button" class="btn btn-sm btn-outline-danger" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>

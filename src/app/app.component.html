@@ -1,3 +1,38 @@
-<h1>
-  {{title}}
-</h1>
+<nav class="navbar navbar-toggleable-md fixed-top navbar-inverse bg-primary">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" routerLink="/dashboard">Perpus</a>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <ul class="navbar-nav" *ngIf="trueLogin()">
+      <li class="nav-item dropdown">
+        <a href="" class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Master</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" routerLink='anggota'>Anggota</a>
+          <a class="dropdown-item" routerLink='buku'>Buku</a>
+          <a class="dropdown-item" routerLink="kategori">Kategori</a>
+          <a class="dropdown-item" routerLink="rak">Rak</a>
+          <a class="dropdown-item" routerLink="denda">Denda</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Transaksi</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pendapatan</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav  ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="login" *ngIf="!trueLogin()">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="logout()" *ngIf="trueLogin()">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<simple-notifications [options]="options"></simple-notifications>
+<router-outlet></router-outlet>

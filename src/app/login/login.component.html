@@ -1,0 +1,25 @@
+<div class="container isi">
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <div class="card">
+        <h3 class="card-header">
+          Login
+        </h3>
+        <div class="card-block">
+          <form>
+            <div class="form-group">
+              <!--<label for="disabledTextInput">Disabled input</label>-->
+              <input type="email" id="email" name="email" [(ngModel)]='email' class="form-control" placeholder="E-mail" autofocus> 
+            </div>
+            <div class="form-group">
+              <!--<label for="disabledTextInput">Disabled input</label>-->
+              <input type="password" id="password" name="password" [(ngModel)]='password' class="form-control" placeholder="Password">
+            </div>
+            <button type="button" class="btn btn-outline-primary btn-block" (click)='doLogin()'>Login</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
