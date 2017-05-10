@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RakService } from '../service/rak.service';
 import { Rak } from '../model/rak';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { NotificationsService } from 'angular2-notifications';
+import { BootstrapService } from '../service/bootstrap.service';
 
 @Component({
   selector: 'app-rak',
@@ -14,12 +14,10 @@ export class RakComponent implements OnInit {
   data: Rak[]
   // add / edit
   dataCollect: any = {}
-  // for modal
-  private modalRef: NgbModalRef
   // loading 
   loading: boolean = false
 
-  constructor(private rak: RakService, private modal: NgbModal, private notif: NotificationsService) { }
+  constructor(private rak: RakService, private modal: BootstrapService, private notif: NotificationsService) { }
 
   ngOnInit() {
     this.getAll()
@@ -36,13 +34,13 @@ export class RakComponent implements OnInit {
   add(template) {
     this.dataCollect = {}
     this.dataCollect.type = 'new'
-    this.modalRef = this.modal.open(template)
+    this.modal.showModal(template)
   }
   // edit
   edit(d, temp) {
     this.dataCollect = d
     this.dataCollect.type = 'edit'
-    this.modalRef = this.modal.open(temp)
+    this.modal.showModal(temp)
   }
   // save 
   save(d) {
@@ -52,7 +50,8 @@ export class RakComponent implements OnInit {
         this.loading = false
         this.notif.success(res.type, res.msg)
         this.getAll()
-        this.closeModal()
+        // this.closeModal()
+        this.modal.hideModal()
         // console.log(res)
       } else {
         this.notif.error(res.type, res.msg)
@@ -75,10 +74,5 @@ export class RakComponent implements OnInit {
 
       })
     }
-  }
-
-  // close modal
-  closeModal() {
-    this.modalRef.dismiss('haha')
   }
 }
